@@ -1,6 +1,6 @@
 # MongoDB Replica Set
 
-A Replica Set of MongoDB running in a Docker container
+A Replica Set of MongoDB running in a Docker container. This is a fork of candis/mongo-replica-set with mongodb version updated to 6.0.1. 
 
 ## Not For Production
 

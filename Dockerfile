@@ -1,15 +1,20 @@
 FROM ubuntu:20.04 as base
 
 # MongoDB download URL
-ARG DB_URL=https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-4.4.12.tgz
+ARG DB_URL=https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-6.0.1.tgz
+ARG SHELL_URL=https://downloads.mongodb.com/compass/mongosh-1.5.4-linux-x64.tgz
 
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl && \
     curl -OL ${DB_URL} && \
-    tar -zxvf mongodb-linux-x86_64-ubuntu2004-4.4.12.tgz && \
-    mv ./mongodb-linux-x86_64-ubuntu2004-4.4.12/bin/* /usr/local/bin/ && \
-    rm -rf ./mongodb-linux-x86_64-ubuntu2004-4.4.12 && rm ./mongodb-linux-x86_64-ubuntu2004-4.4.12.tgz
+    tar -zxvf mongodb-linux-x86_64-ubuntu2004-6.0.1.tgz && \
+    mv ./mongodb-linux-x86_64-ubuntu2004-6.0.1/bin/* /usr/local/bin/ && \
+    rm -rf ./mongodb-linux-x86_64-ubuntu2004-6.0.1 && rm ./mongodb-linux-x86_64-ubuntu2004-6.0.1.tgz && \
+    curl -OL ${SHELL_URL} && \
+    tar -zxvf mongosh-1.5.4-linux-x64.tgz && \
+    mv ./mongosh-1.5.4-linux-x64/bin/* /usr/local/bin/ && \
+    rm ./mongosh-1.5.4-linux-x64.tgz && rm -rf ./mongosh-1.5.4-linux-x64
 
 COPY ./init-mongodbs.sh ./init-replica.sh ./entry-point.sh /
 
